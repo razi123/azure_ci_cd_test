@@ -11,21 +11,23 @@ strategy:
     
 jobs:
 - job: 'requirements and dependencies'
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(python.version)'
-      displayName: 'Use Python $(python.version)'
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
 
-    - script: |
-        pip install -r requirements-build.txt
-        displayName: 'Install dependencies for build'
-      workingDirectory: $(System.DefaultWorkingDirectory)
+  - script: |
+      pip install -r requirements-build.txt
+    displayName: 'Install dependencies for build'
+    workingDirectory: $(System.DefaultWorkingDirectory)
 
 - job: 'Integration tests'
   dependsOn: 'requirements and dependencies'
+  steps:
   -script: |
     pytest test_python_calculator.py
+  displayName: 'Integration tests'
   workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
       
