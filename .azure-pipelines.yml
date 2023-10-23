@@ -24,7 +24,7 @@ stages:
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
   
-  - stage: 'Integration Test'
+  - stage: Integration_Test
     jobs:    
     - job:
       dependsOn: Build
