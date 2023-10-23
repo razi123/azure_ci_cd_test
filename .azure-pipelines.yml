@@ -3,12 +3,6 @@ trigger:
   
 pool:
   vmImage: ubuntu-latest
-  
-  strategy:
-    matrix:
-      python39:
-        pythonVersion: '3.11'
-  
 stages:
   - stage: BuildAndTest 
     jobs:
@@ -16,21 +10,14 @@ stages:
       steps:
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: '$(pythonVersion)'
-        displayName: 'Use Python $(pythonVersion)'
+          versionSpec: '3.9'
+        displayName: 'Use Python 3.9'
     
       - script: |
           pip install -r requirements-build.txt
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
   
-  
-    - job: Test
-      dependsOn: Build
-      steps:
-      - script: |
-          echo "Running integration tests"
-
     - job:
       steps:
       - script: |
