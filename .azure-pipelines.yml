@@ -12,6 +12,13 @@ pool:
 stages:
   - stage: BuildAndTest 
     jobs:
+    
+    - job: PythonVersion
+      steps:
+        - script: echo 'Setting python $(python.version)'
+          env:
+            python.version: $(python.version)
+
     - job: Build
       steps:
       - task: UsePythonVersion@0
