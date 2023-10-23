@@ -10,7 +10,7 @@ pool:
         python.version: '3.9'
   
 stages:
-  - stage: Build 
+  - stage: BuildAndTest 
     jobs:
     - job: Build
       steps:
@@ -24,15 +24,14 @@ stages:
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
   
-  - stage: Integration_Test
-    jobs:    
-    - job:
+  
+    - job: Test
+      dependsOn: Build
       steps:
       - script: |
           echo "Running integration tests"
 
     - job:
-      dependsOn: Build
       steps:
       - script: |
           pytest test_python_calculator.py
