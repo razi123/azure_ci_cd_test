@@ -27,13 +27,14 @@ stages:
   - stage: Integration_Test
     jobs:    
     - job:
+      steps:
+      - script: |
+          echo "Running integration tests"
+
+    - job:
       dependsOn: Build
       steps:
       - script: |
           pytest test_python_calculator.py
         displayName: 'Unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
-    
-
-    
-    
