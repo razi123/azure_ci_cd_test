@@ -1,5 +1,12 @@
 trigger:
-- master
+  branches:
+    include:
+      - master
+  
+  paths:
+    include:
+      - .azure-pipelines/.azure-pipelines.yml
+
 
 stages:
 - stage: build
