@@ -8,27 +8,32 @@ pool:
     matrix:
       python39:
         python.version: '3.9'
-      
-  jobs:
-  - job: 'requirements and dependencies'
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(python.version)'
-      displayName: 'Use Python $(python.version)'
   
-    - script: |
-        pip install -r requirements-build.txt
-      displayName: 'Install dependencies for build'
-      workingDirectory: $(System.DefaultWorkingDirectory)
+stages:
+  - stage: Build 
+    jobs:
+    - job: 
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '$(python.version)'
+        displayName: 'Use Python $(python.version)'
+    
+      - script: |
+          pip install -r requirements-build.txt
+        displayName: 'Install dependencies for build'
+        workingDirectory: $(System.DefaultWorkingDirectory)
   
-  - job: 'Integration tests'
-    steps:
-    - script: |
-        pytest test_python_calculator.py
-      displayName: 'Integration tests'
-      workingDirectory: $(System.DefaultWorkingDirectory)/test/
-  
+  - stage: 'Integration Test'
+    jobs:    
+    - job:
+      dependsOn: Build
+      steps:
+      - script: |
+          pytest test_python_calculator.py
+        displayName: 'Unit tests'
+        workingDirectory: $(System.DefaultWorkingDirectory)/test/
+    
 
-      
+    
     
