@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 stages:
-  - stage: BuildAndTest 
+  - stage: Build  
     jobs:
     - job: Build
       steps:
@@ -18,7 +18,9 @@ stages:
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
   
-    - job:
+  - stage: Test
+    jobs:
+    - job: Test
       steps:
       - script: |
           pytest test_python_calculator.py
