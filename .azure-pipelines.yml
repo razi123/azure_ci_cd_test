@@ -1,5 +1,5 @@
 trigger:
-  master
+- master
 
 pool:
   vmImage: ubuntu-latest
@@ -9,7 +9,6 @@ strategy:
     python39:
       python.version: '3.9'
     
-
 steps:
   - task: UsePythonVersion@0
     inputs:
@@ -19,9 +18,10 @@ steps:
   - script: |
       python -m pip install --upgrade pip
       pip install pytest pytest-azurepipelines
-      pytest
+      pytest test_pytest-azurepipelines.py
     displayName: 'pytest'
-    
-     
+    workingDirectory: $(System.DefaultWorkingDirectory)/test/
+
+
       
     
