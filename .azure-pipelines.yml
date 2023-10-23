@@ -9,19 +9,24 @@ strategy:
     python39:
       python.version: '3.9'
     
-steps:
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '$(python.version)'
-    displayName: 'Use Python $(python.version)'
+jobs:
+- job: 'requirements and dependencies'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
 
-  - script: |
-      python -m pip install --upgrade pip
-      pip install pytest pytest-azurepipelines
-      pytest test_python_calculator.py
-    displayName: 'pytest'
-    workingDirectory: $(System.DefaultWorkingDirectory)/test/
+    - script: |
+        pip install -r requirements-build.txt
+        displayName: 'Install dependencies for build'
+      workingDirectory: $(System.DefaultWorkingDirectory)
 
+- job: 'Integration tests'
+  dependsOn: 'requirements and dependencies'
+  -script: |
+    pytest test_python_calculator.py
+  workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
       
     

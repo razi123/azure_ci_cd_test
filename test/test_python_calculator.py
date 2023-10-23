@@ -8,6 +8,6 @@ def test_add_function():
 
     actual = add_function(param1, param2)
     print(actual)
-    expected = 300
+    expected = 30
 
     assert actual == expected
