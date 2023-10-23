@@ -1,0 +1,18 @@
+trigger:
+- master
+
+stages:
+- stage: build
+  jobs:
+  - job: build_job
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - template: templates/build_python.yml
+
+
+- stage: deploy_dev
+  jobs:
+  - job: deploy_job
+  
+
