@@ -18,7 +18,7 @@ steps:
   - script: |
       python -m pip install --upgrade pip
       pip install pytest pytest-azurepipelines
-      pytest test_pytest-azurepipelines.py
+      pytest test_python_calculator.py
     displayName: 'pytest'
     workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
