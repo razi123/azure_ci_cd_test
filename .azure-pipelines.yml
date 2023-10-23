@@ -12,18 +12,23 @@ stages:
         inputs:
           versionSpec: '3.9'
         displayName: 'Use Python 3.9'
-    
+        
       - script: |
+          sudo apt-get update
+          
+          python -m pip install --upgrade pip
           pip install -r requirements-build.txt 
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
   
+  - stage: Test
+    jobs:
     - job: Test
       steps:
       - script: |
           pip install pytest
-          pytest test_python_calculator.py
+          pytest 
         displayName: 'Unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
-  
+        
