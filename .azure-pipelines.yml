@@ -7,24 +7,17 @@ pool:
   strategy:
     matrix:
       python39:
-        python.version: '3.9'
+        pythonVersion: '3.11'
   
 stages:
   - stage: BuildAndTest 
     jobs:
-    
-    - job: PythonVersion
-      steps:
-        - script: echo 'Setting python $(python.version)'
-          env:
-            python.version: $(python.version)
-
     - job: Build
       steps:
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: '$(python.version)'
-        displayName: 'Use Python $(python.version)'
+          versionSpec: '$(pythonVersion)'
+        displayName: 'Use Python $(pythonVersion)'
     
       - script: |
           pip install -r requirements-build.txt
