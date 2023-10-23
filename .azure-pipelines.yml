@@ -14,8 +14,6 @@ stages:
         displayName: 'Use Python 3.9'
     
       - script: |
-          python -m venv venv
-          source venv/bin/activate
           pip install -r requirements-build.txt 
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
@@ -25,7 +23,7 @@ stages:
     - job: Test
       steps:
       - script: |
-          source venv/bin/activate
+          pip install pytest
           pytest test_python_calculator.py
         displayName: 'Unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
