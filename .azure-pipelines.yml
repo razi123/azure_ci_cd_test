@@ -23,7 +23,6 @@ pool:
       workingDirectory: $(System.DefaultWorkingDirectory)
   
   - job: 'Integration tests'
-    dependsOn: 'requirements and dependencies'
     steps:
     - script: |
         pytest test_python_calculator.py
