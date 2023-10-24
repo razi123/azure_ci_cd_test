@@ -26,13 +26,19 @@ stages:
           pip install -r requirements-build.txt 
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
+      
+      - script: |
+          python setup.py dist
+        displayName: 'Build Python Distribution'
+        workingDirectory: $(System.DefaultWorkingDirectory)
 
       # run python tests
       - script: |
           pip install pytest
-          pytest 
+          python setup.py test
         displayName: 'All unit tests'
-        workingDirectory: $(System.DefaultWorkingDirectory)/test/
+        condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
+        failOnStderr: false
 
   - job: artifacts
     steps:
