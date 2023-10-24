@@ -34,8 +34,6 @@ stages:
           pytest 
         displayName: 'All unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
-        #condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
-        #failOnStderr: false
 
 - stage: PublishArtifact
   jobs:

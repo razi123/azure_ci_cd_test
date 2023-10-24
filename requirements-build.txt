@@ -1,3 +1,5 @@
 pip
 pytest
 pytest-azurepipelines
+setuptools 
+wheel
