@@ -45,6 +45,7 @@ stages:
       displayName: 'Use Python 3.9'
 
     - script: |
+        pip install wheel setuptools
         python setup.py sdist bdist_wheel
       displayName: 'Build Python Distribution'
 
