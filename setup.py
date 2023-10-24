@@ -28,10 +28,8 @@ class TestCommand(Command):
 
     def run(self):
         test_dir = 'test'  # Adjust this path to the location of your test directory
-        return pytest.main([test_dir, '--no-cov'])
+        return pytest.main([test_dir])
         
-        #import pytest
-        #return pytest.main(['tests', '--no-cov'])
 
 setup(
     name="Benz",
