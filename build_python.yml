@@ -1,4 +1,7 @@
-trigger: none
+parameters:
+  name: run_test
+  type: boolean
+  default: true
 
 pool:
   vmImage: ubuntu-latest
@@ -25,6 +28,7 @@ stages:
           pip install pytest
           pytest 
         displayName: 'All unit tests'
+        condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
         failOnStderr: false
   
     - job: Test
