@@ -1,13 +1,6 @@
 trigger:
-  branches:
-    include:
-      - master
+- master
   
-  paths:
-    include:
-      - .azure-pipelines/*.yml
-
-
 stages:
 - stage: build
   jobs:
@@ -15,7 +8,7 @@ stages:
   pool:
     vmImage: ubuntu-latest
   steps:
-  - template: templates/build_python.yml
+  - template: ./build_python.yml
 
 
 - stage: deploy_dev
