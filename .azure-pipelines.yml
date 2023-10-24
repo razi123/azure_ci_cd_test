@@ -6,13 +6,13 @@ parameters:
     type: boolean
     default: true
 
+pool:
+  vmImage: ubuntu-latest
+
 stages:
 - stage: build
   jobs:
   - job: build_job
-  pool:
-    vmImage: ubuntu-latest
-  
     steps:
 
       - task: UsePythonVersion@0
@@ -33,8 +33,9 @@ stages:
           pip install pytest
           pytest 
         displayName: 'All unit tests'
-        condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
-        failOnStderr: false
+        workingDirectory: $(System.DefaultWorkingDirectory)/test/
+        #condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
+        #failOnStderr: false
 
 - stage: PublishArtifact
   jobs:
