@@ -14,7 +14,6 @@ stages:
   jobs:
   - job: build_job
     steps:
-
       - task: UsePythonVersion@0
         inputs:
           versionSpec: '3.9'
@@ -35,15 +34,8 @@ stages:
         displayName: 'All unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
-- stage: PublishArtifact
-  jobs:
-  - job: Publish
+  - job: artifacts
     steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.9'
-      displayName: 'Use Python 3.9'
-
     - script: |
         pip install wheel setuptools
         python setup.py sdist bdist_wheel
