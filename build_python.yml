@@ -31,13 +31,6 @@ stages:
         condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
         failOnStderr: false
   
-    - job: Test
-      steps:
-      - script: |
-          pip install pytest
-          pytest 
-        displayName: 'Unit tests'
-        workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
   - stage: PublishArtifact
     jobs:
@@ -57,6 +50,5 @@ stages:
         inputs:
           PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
           ArtifactName: 'python-artifact'
-
 
         
