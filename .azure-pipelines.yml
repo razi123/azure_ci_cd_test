@@ -7,8 +7,9 @@ stages:
   - job: build_job
   pool:
     vmImage: ubuntu-latest
-  steps:
-  - template: ./build_python.yml
+  
+    steps:
+    - template: ./build_python.yml
 
 
 - stage: deploy_dev
