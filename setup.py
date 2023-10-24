@@ -3,7 +3,7 @@ import os
 import shutil
 import subprocess
 from distutils.cmd import Command
-import pytest
+
 
 class DistCommand(Command):
 
@@ -27,6 +27,7 @@ class TestCommand(Command):
     def finalize_options(self): pass
 
     def run(self):
+        import pytest
         test_dir = 'test'  # Adjust this path to the location of your test directory
         return pytest.main([test_dir])
         
