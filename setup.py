@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 from distutils.cmd import Command
+import pytest
 
 class DistCommand(Command):
 
