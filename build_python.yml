@@ -19,13 +19,13 @@ stages:
           pip install -r requirements-build.txt 
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
-  
-    - job: Test
-      steps:
+
+      # run python tests
       - script: |
           pip install pytest
           pytest 
-        displayName: 'Unit tests'
+        displayName: 'pytest'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
+        
 
         
