@@ -39,4 +39,24 @@ stages:
         displayName: 'Unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
 
+  - stage: PublishArtifact
+    jobs:
+    - job: Publish
+      steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.9'
+        displayName: 'Use Python 3.9'
+
+      - script: |
+          python setup.py sdist bdist_wheel
+        displayName: 'Build Python Distribution'
+
+      - task: PublishBuildArtifacts@1
+        condition: succeeded()
+        inputs:
+          PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
+          ArtifactName: 'python-artifact'
+
+
         

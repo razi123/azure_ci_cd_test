@@ -16,7 +16,7 @@ stages:
     steps:
     - template: build_python.yml
       parameters:
-        run_test: ${{ parameters.run_test}}
+        run_test: ${{ parameters.run_test }}
 
 
 - stage: deploy_dev
