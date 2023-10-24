@@ -4,8 +4,10 @@ trigger:
       - master
   
   paths:
+    exclude:
+      - .azure-pipelines/templates/*
     include:
-      - .azure-pipelines/.azure-pipelines.yml
+      - .azure-pipelines/* #.azure-pipelines.yml
 
 
 stages:
