@@ -35,7 +35,7 @@ stages:
       # run python tests
       - script: |
           pip install pytest
-          python setup.py test/
+          python setup.py test
         displayName: 'All unit tests'
         condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
         failOnStderr: false
