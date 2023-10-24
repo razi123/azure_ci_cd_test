@@ -24,8 +24,15 @@ stages:
       - script: |
           pip install pytest
           pytest 
-        displayName: 'pytest'
+        displayName: 'All unit tests'
+        failOnStderr: false
+  
+    - job: Test
+      steps:
+      - script: |
+          pip install pytest
+          pytest 
+        displayName: 'Unit tests'
         workingDirectory: $(System.DefaultWorkingDirectory)/test/
-        
 
         
