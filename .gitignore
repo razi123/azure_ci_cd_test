@@ -1,3 +1,7 @@
 *.xml
 *.iml
 *.pyc
+.*eggs
+Benz.egg-info/*
+dist/*
+venv/*
