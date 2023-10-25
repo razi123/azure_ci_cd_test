@@ -5,6 +5,10 @@ parameters:
   - name: run_test
     type: boolean
     default: true
+  
+  - name: run_build
+    type: boolean
+    default: true
 
 pool:
   vmImage: ubuntu-latest
