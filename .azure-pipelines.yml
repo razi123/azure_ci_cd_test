@@ -46,6 +46,7 @@ stages:
     - script: |
         pip install wheel setuptools
         python setup.py sdist bdist_wheel
+        ls dist
       displayName: 'Build Python Distribution'
 
     - task: PublishBuildArtifacts@1
