@@ -57,7 +57,7 @@ stages:
         cd $(System.DefaultWorkingDirectory)
         mkdir staging
         cp -r dist ./staging                     #$(Build.ArtifactStagingDirectory)
-        cp -r .azure-pipelines ./staging         #$(Build.ArtifactStagingDirectory)
+        cp -r .azure-pipelines.yml ./staging         #$(Build.ArtifactStagingDirectory)
         ls staging
       # list staging
       condition: and(succeeded(), eq(${{ parameters.run_build }}, true))
