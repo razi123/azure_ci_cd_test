@@ -44,7 +44,7 @@ stages:
   - job: artifacts
     steps:
     - script: |
-        pip install wheel setuptools
+        pip install wheel setuptools twine
         python setup.py sdist bdist_wheel
         ls dist
       displayName: 'Build Python Distribution'
@@ -54,6 +54,11 @@ stages:
       inputs:
         PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
         ArtifactName: 'python-artifact'
-      
-  
 
+    - task: TwineAuthenticate@1
+      displayName: Twine Authenticate
+      inputs:
+        artifactFeed: "AZURE_CI_CD_TEST"
+      
+    - script: |
+        python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRG_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
