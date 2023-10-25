@@ -59,6 +59,12 @@ stages:
       displayName: Twine Authenticate
       inputs:
         artifactFeed: "AZURE_CI_CD_TEST"
+    
+    - script: |
+        cp -r dist $(Build.ArtifactStagingDirectory)
+        cp -r .azure-pipelines $(Build.ArtifactStagingDirectory)
+      condition: and(succeeded(), eq(${{ parameters.run_build }}, true))
+      displayName: CopyFilesToStaging
       
     - script: |
         python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRC_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
