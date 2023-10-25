@@ -21,28 +21,22 @@ stages:
         
       - script: |
           sudo apt-get update
-          python -m venv venv
-          source ./venv/Scripts/activate
-          
+          python3 -m venv venv
+          source ./venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements-build.txt 
-          source deactivate
         displayName: 'Install dependencies for build'
         workingDirectory: $(System.DefaultWorkingDirectory)
       
       - script: |
-          source ./venv/Scripts/activate
           python setup.py dist
-          source deactivate
         displayName: 'Build Python Distribution'
         workingDirectory: $(System.DefaultWorkingDirectory)
 
       # run python tests
       - script: |
-          source ./venv/Scripts/activate
           pip install pytest
           python setup.py test
-          source deactivate
         displayName: 'All unit tests'
         condition: and(succeeded(), eq(${{ parameters.run_test }}, true))
         failOnStderr: false
@@ -50,10 +44,8 @@ stages:
   - job: artifacts
     steps:
     - script: |
-        source ./venv/Scripts/activate
         pip install wheel setuptools
         python setup.py sdist bdist_wheel
-        source deactivate
       displayName: 'Build Python Distribution'
 
     - task: PublishBuildArtifacts@1
