@@ -54,21 +54,26 @@ stages:
       displayName: 'Build Python Distribution'
 
     - script: |
-        cp -r dist $(Build.ArtifactStagingDirectory)
-        cp -r .azure-pipelines $(Build.ArtifactStagingDirectory)
+        cd '$(System.DefaultWorkingDirectory)
+        mkdir staging
+        cp -r dist ./staging                     #$(Build.ArtifactStagingDirectory)
+        cp -r .azure-pipelines ./staging         #$(Build.ArtifactStagingDirectory)
+        ls staging
+      # list staging
       condition: and(succeeded(), eq(${{ parameters.run_build }}, true))
       displayName: CopyFilesToStaging
 
     - task: PublishBuildArtifacts@1
       condition: succeeded()
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)/dist'
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/staging'
         ArtifactName: 'python-artifact'
 
-    - task: TwineAuthenticate@1
-      displayName: Twine Authenticate
-      inputs:
-        artifactFeed: "AZURE_CI_CD_TEST"
+
+    # - task: TwineAuthenticate@1
+    #   displayName: Twine Authenticate
+    #   inputs:
+    #     artifactFeed: "AZURE_CI_CD_TEST"
       
-    - script: |
-        python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRC_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
+    # - script: |
+    #     python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRC_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
