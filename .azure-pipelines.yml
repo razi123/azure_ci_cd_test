@@ -54,7 +54,7 @@ stages:
       displayName: 'Build Python Distribution'
 
     - script: |
-        cd '$(System.DefaultWorkingDirectory)
+        cd $(System.DefaultWorkingDirectory)
         mkdir staging
         cp -r dist ./staging                     #$(Build.ArtifactStagingDirectory)
         cp -r .azure-pipelines ./staging         #$(Build.ArtifactStagingDirectory)
