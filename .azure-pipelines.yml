@@ -61,4 +61,4 @@ stages:
         artifactFeed: "AZURE_CI_CD_TEST"
       
     - script: |
-        python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRG_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
+        python -m twine upload -r "AZURE_CI_CD_TEST" --config-file $(PYPIRC_PATH) $(System.DefaultWorkingDirectory)/drop/dist/*
