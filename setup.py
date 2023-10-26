@@ -16,6 +16,8 @@ class DistCommand(Command):
     def run(self):
         if os.path.exists('build'):
             shutil.rmtree('build')
+        if os.path.exists('dist'):
+            shutil.rmtree('dist')
         subprocess.run(["python", "setup.py", "sdist", "bdist_wheel"])
 
 class TestCommand(Command):
@@ -35,6 +37,9 @@ class TestCommand(Command):
 setup(
     name="Benz",
     version="1.0.0",
+    author="Raziuddin",
+    author_email="raziuddinkhazi@gmail.com",
+    url="",
     packages=find_packages("src"),
     install_requires=["numpy"],
     tests_require=['pytest', 'pytest-cov'],
